@@ -18,12 +18,62 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>News</title>
+    <title>Weather & News</title>
   </head>
   <body>
 
+  <div class ="container mt-5">
+    <img src="/images/weather.jpg"
+  </div>
     <div class="container mt-5">
-      <h1>News</h1>
+
+    
+        <h1>Weather Forecast</h1>
+   
+            <div class="row">
+            <%="It is currently #{@forecast["current"]["temp"]} degrees and 
+            #{@forecast["current"]["weather"][0]["description"]}"%>
+            </div>
+
+        <h1>Extended Forecast</h1>
+            <div class="row">          
+            <% day_number = 1
+            for @day in @forecast["daily"]
+            if day_number < 9
+            puts "On day #{day_number}, A high of #{@day["temp"]["max"]} and #{@day["weather"][0]["description"]}"
+            else
+            puts "Error"
+            end    
+            day_number = day_number + 1
+            end %>
+            <%="On day #{day_number}, A high of #{@day["temp"]["max"]} and #{@day["weather"][0]["description"]}"%> 
+            </div>
+                              
+        </div>
+
+    
+<div class ="container mt-5">
+    <h1>News</h1>        
+    <img src="/images/print1920.jpg"
+  </div>
+  
+  <div class="container mt-5">
+     
+      <h2>Headlines</h2>
+      
+      <%for @story in @news["articles"]
+      puts "Top stories today #{@story["title"]}"
+      end%> 
+      <h4> <%= "Top story: #{@story["title"]}"%>   </h4>
+      <%for @details in @news["articles"]
+      puts "Full story: #{@details["description"]}"
+      end%> 
+      <p> <%="Details: #{@details["description"]}"%>  </p>
+      <%for @url in @news["articles"]
+      puts "URL: #{@url["url"]}"
+      end%> 
+      <p> <%= "URL: #{@url["url"]}"%>  </p>    
+     
     </div>
 
     <!-- Optional JavaScript -->
